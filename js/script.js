@@ -56,6 +56,11 @@ Promise.all([
         d.Element === "Fat supply quantity (g/capita/day)"
     );
 
+    const populationRows = foodData.filter(d =>
+        d.Item === "Population" &&
+        d.Element === "Total Population - Both sexes"
+    );
+
     function buildMetricMap(rows, year){
         const map = {};
 
@@ -69,6 +74,7 @@ Promise.all([
     let foodSupplyMap = buildMetricMap(foodRows, selectedYear);
     let proteinMap = buildMetricMap(proteinRows, selectedYear);
     let fatMap = buildMetricMap(fatRows, selectedYear);
+    let populationMap = buildMetricMap(populationRows, selectedYear);
 
     function getCurrentMetricMap(){
 
@@ -175,6 +181,7 @@ Promise.all([
         foodSupplyMap = buildMetricMap(foodRows, selectedYear);
         proteinMap = buildMetricMap(proteinRows, selectedYear);
         fatMap = buildMetricMap(fatRows, selectedYear);
+        populationMap = buildMetricMap(populationRows, selectedYear);
 
         const currentMap = getCurrentMetricMap();
         const colorScale = getColorScale();
@@ -202,9 +209,16 @@ Promise.all([
             const country = countryMapping[d.properties.name] || d.properties.name;
             const currentMap = getCurrentMetricMap();
             const value = currentMap[country];
+            const population = populationMap[country];
 
             let metricName = "";
             let unit = "";
+            let populationText = "No Data";
+
+            if(population && !isNaN(population)){
+                populationText =
+                    (population/1000).toFixed(2) + " million";
+            }
 
             if(selectedMetric === "food"){
                 metricName = "Food Supply";
@@ -224,9 +238,12 @@ Promise.all([
                     <strong>${country}</strong><br><br>
 
                     Year:
-                    ${selectedYear.replace("Y","")}
+                    ${selectedYear.replace("Y","")}<br>
 
-                    ${metricName}:<br>
+                    Population:
+                    ${populationText} <br>
+
+                    ${metricName}:
                     ${value ? value.toFixed(1) : "No Data"} ${unit}<br><br>
                 `);
         })

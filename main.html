@@ -17,25 +17,138 @@
 
     <h1>NutriMetrics Global Dashboard</h1>
 
+    <div class="filter-panel">
+
+        <label>Year</label>
+
+        <select id="yearSelect">
+            <option value="Y2023">2023</option>
+            <option value="Y2022">2022</option>
+            <option value="Y2021">2021</option>
+            <option value="Y2020">2020</option>
+            <option value="Y2019">2019</option>
+            <option value="Y2018">2018</option>
+            <option value="Y2017">2017</option>
+            <option value="Y2016">2016</option>
+            <option value="Y2015">2015</option>
+            <option value="Y2014">2014</option>
+            <option value="Y2013">2013</option>
+            <option value="Y2012">2012</option>
+            <option value="Y2011">2011</option>
+            <option value="Y2010">2010</option>
+        </select>
+
+    </div>
+
     <div class="dashboard">
 
-        <div id="map"></div>
+        <!-- MAP -->
+        <div class="chart-card">
 
-        <div id="trend"></div>
+            <div class="card-header">
+                <div class="title-section">
+                    <h3 id="mapTitle"> Food Supply In 2023</h3>
+                    <p class="subtitle">
+                        Nutritional Availability Across Countries
+                    </p>
+                </div>
+            </div>
 
-        <div id="ranking"></div>
+            <div class="map-layout">
+                <div id="map"></div>
+                <div class="controls-panel">
+                    <select id="metricSelect">
+                        <option value="food">Food Supply</option>
+                        <option value="protein">Protein Supply</option>
+                        <option value="fat">Fat Supply</option>
+                    </select>
 
-        <div id="scatter"></div>
+                    <div id="legend-box">
+                        <h4>Legend</h4>
 
-        <div id="stacked"></div>
+                        <div class="legend-item">
+                            <span class="legend-red"></span>
+                            <div>
+                                <strong>Low</strong><br>
+                                <span id="legend-low">Below 2000</span>
+                            </div>
+                        </div>
 
-        <div id="waterfall"></div>
+                        <div class="legend-item">
+                            <span class="legend-yellow"></span>
+                            <div>
+                                <strong>Medium</strong><br>
+                                <span id="legend-medium">2000 - 3000</span>
+                            </div>
+                        </div>
+
+                        <div class="legend-item">
+                            <span class="legend-green"></span>
+                            <div>
+                                <strong>High</strong><br>
+                                <span id="legend-high">Above 3000</span>
+                            </div>
+                        </div>
+
+                        <div class="legend-item">
+                            <span class="legend-gray"></span>
+                            <div>
+                                <strong>No Data</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TREND -->
+        <div class="chart-card">
+
+            <h3>Population vs Food Supply Trend</h3>
+
+            <div id="trend"></div>
+
+        </div>
+
+        <!-- RANKING -->
+        <div class="chart-card">
+
+            <h3>Top Countries Ranking</h3>
+
+            <div id="ranking"></div>
+
+        </div>
+
+        <!-- SCATTER -->
+        <div class="chart-card">
+
+            <h3>Protein vs Fat Supply</h3>
+
+            <div id="scatter"></div>
+
+        </div>
+
+        <!-- STACKED -->
+        <div class="chart-card">
+
+            <h3>Vegetal vs Animal Products</h3>
+
+            <div id="stacked"></div>
+
+        </div>
+
+        <!-- WATERFALL -->
+        <div class="chart-card">
+
+            <h3>Food Supply Chain</h3>
+
+            <div id="waterfall"></div>
+
+        </div>
 
     </div>
 
     <div id="tooltip"></div>
     <script src="js/script.js"></script>
-
 </body>
-
 </html>

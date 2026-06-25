@@ -15,29 +15,29 @@
 
 <body>
 
-    <h1>NutriMetrics Global Dashboard</h1>
+    <div class="page-header">
+        <div class="filter-panel">
+            <label for="yearSelect">Year</label>
 
-    <div class="filter-panel">
+            <select id="yearSelect">
+                <option value="Y2023">2023</option>
+                <option value="Y2022">2022</option>
+                <option value="Y2021">2021</option>
+                <option value="Y2020">2020</option>
+                <option value="Y2019">2019</option>
+                <option value="Y2018">2018</option>
+                <option value="Y2017">2017</option>
+                <option value="Y2016">2016</option>
+                <option value="Y2015">2015</option>
+                <option value="Y2014">2014</option>
+                <option value="Y2013">2013</option>
+                <option value="Y2012">2012</option>
+                <option value="Y2011">2011</option>
+                <option value="Y2010">2010</option>
+            </select>
+        </div>
 
-        <label>Year</label>
-
-        <select id="yearSelect">
-            <option value="Y2023">2023</option>
-            <option value="Y2022">2022</option>
-            <option value="Y2021">2021</option>
-            <option value="Y2020">2020</option>
-            <option value="Y2019">2019</option>
-            <option value="Y2018">2018</option>
-            <option value="Y2017">2017</option>
-            <option value="Y2016">2016</option>
-            <option value="Y2015">2015</option>
-            <option value="Y2014">2014</option>
-            <option value="Y2013">2013</option>
-            <option value="Y2012">2012</option>
-            <option value="Y2011">2011</option>
-            <option value="Y2010">2010</option>
-        </select>
-
+        <h1>NutriMetrics Global Dashboard</h1>
     </div>
 
     <div class="dashboard">
@@ -46,17 +46,32 @@
         <div class="chart-card">
 
             <div class="card-header">
-                <div class="title-section">
-                    <h3 id="mapTitle"> Food Supply In 2023</h3>
-                    <p class="subtitle">
-                        Nutritional Availability Across Countries
-                    </p>
+                <div class="header-left">
+                    <div class="title-section">
+                        <h3 id="mapTitle"> Food Supply In 2023</h3>
+                        <p class="subtitle">
+                            Nutritional Availability Across Countries
+                        </p>
+                    </div>
+
+                    <div id="selectedCountryCard">
+                        <span class="label">
+                            Selected Country
+                        </span>
+                        <span id="selectedCountry">
+                            Click a Country
+                        </span>
+                    </div>
                 </div>
             </div>
 
             <div class="map-layout">
                 <div id="map"></div>
                 <div class="controls-panel">
+                    <button id="resetZoom">
+                        Reset View
+                    </button>
+
                     <select id="metricSelect">
                         <option value="food">Food Supply</option>
                         <option value="protein">Protein Supply</option>
@@ -149,6 +164,8 @@
     </div>
 
     <div id="tooltip"></div>
-    <script src="js/script.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/data.js"></script>
 </body>
 </html>

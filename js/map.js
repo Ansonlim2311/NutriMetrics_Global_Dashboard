@@ -1,12 +1,7 @@
-let selectedYear = "Y2023";
-let selectedMetric = "food";
-let selectedCountry = null;
-let tooltipLocked = false;
-
 function initMap(world, foodData) {
 
-    const width = 500;
-    const height = 300;
+    const width = 400;
+    const height = 270;
 
     const svg = d3.select("#map")
     .append("svg")
@@ -393,6 +388,7 @@ function initMap(world, foodData) {
         .on("click", function(event, d){
             const country = countryMapping[d.properties.name] || d.properties.name;
             selectedCountry = country
+            updateWaterfall();
             tooltipLocked = true;
             d3.select("#selectedCountry")
                 .text(selectedCountry);
@@ -455,6 +451,7 @@ function initMap(world, foodData) {
         .on("change", function(){
             selectedYear = this.value;
             updateMap();
+            updateWaterfall();
         });
 
     d3.select("#resetZoom")

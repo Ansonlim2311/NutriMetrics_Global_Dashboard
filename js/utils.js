@@ -1,3 +1,8 @@
+let selectedYear = "Y2023";
+let selectedMetric = "food";
+let selectedCountry = null;
+let tooltipLocked = false;
+
 const countryMapping = {
     "Russia": "Russian Federation",
     "Vietnam": "Viet Nam",
@@ -56,4 +61,14 @@ function getLatestAvailable(row){
         }
     }
     return null;
+}
+
+function formatTonnes(value){
+    if(value >= 1000000){
+        return (value/1000000).toFixed(2) + " B t";
+    }
+    if(value >= 1000){
+        return (value/1000).toFixed(2) + " M t";
+    }
+    return value.toLocaleString() + " K t";
 }

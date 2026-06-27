@@ -151,7 +151,6 @@ function initMap(world, foodData) {
     svg.call(zoom);
     svg.on("click", function(event) {
         if (event.target.tagName === "svg") {
-            tooltipLocked = false;
             selectedCountry = null;
             tooltip.style("opacity", 0);
             d3.select("#selectedCountry")
@@ -389,7 +388,7 @@ function initMap(world, foodData) {
             const country = countryMapping[d.properties.name] || d.properties.name;
             selectedCountry = country
             updateWaterfall();
-            tooltipLocked = true;
+            updateScatter();
             d3.select("#selectedCountry")
                 .text(selectedCountry);
             updateSelection();
@@ -407,17 +406,14 @@ function initMap(world, foodData) {
             const currentMap = getCurrentMetricMap();
             const value = currentMap[country];
             
-            if (!tooltipLocked) { 
-                showTooltip(event, country);
-            }
+            showTooltip(event, country);
+            d3.select(this).attr("stroke", "#000").attr("stroke-width", 1.5);
         })
 
         .on("mousemove", function(event){
-            if (!tooltipLocked) {
-                tooltip
-                    .style("left", (event.pageX + 15) + "px")
-                    .style("top", (event.pageY - 25) + "px");
-            }
+            tooltip
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY - 25) + "px");
         })
 
         .on("mouseout", function(){
@@ -441,10 +437,12 @@ function initMap(world, foodData) {
                     return "#d9d9d9";
 
                 })
-                if (!tooltipLocked) {
+                updateSelection();
+                if (selectedCountry) {
+                    showTooltip(event, selectedCountry);
+                } else {
                     tooltip.style("opacity", 0);
                 }
-                updateSelection();
             });
 
     d3.select("#yearSelect")
@@ -452,6 +450,7 @@ function initMap(world, foodData) {
             selectedYear = this.value;
             updateMap();
             updateWaterfall();
+            updateScatter();
         });
 
     d3.select("#resetZoom")

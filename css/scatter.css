@@ -1,0 +1,81 @@
+.scatter-card{
+    width: 480px;
+    padding:14px 16px;
+}
+
+.scatter-header{
+    margin-bottom:4px;
+}
+
+.scatter-header h3{
+    margin:0;
+    padding:0;
+    font-size:20px;
+    font-weight:600;
+    line-height:1.2;
+}
+
+.scatter-subtitle{
+    margin:2px 0 4px 0;
+    font-size:13px;
+    color:#666;
+}
+
+#tooltip{
+    position:absolute;
+    background:white;
+    border-radius:12px;
+    padding:14px 16px;
+    min-width:240px;
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+    border:1px solid #dfe3e8;
+}
+
+.tooltip-title{
+    font-size:16px;
+    font-weight:700;
+    color:#222;
+    margin-bottom:8px;
+    border-bottom:1px solid #ececec;
+    padding-bottom:8px;
+}
+
+.tooltip-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.tooltip-table td{
+    padding:4px 0;
+    font-size:13px;
+}
+
+.tooltip-table td:first-child{
+    color:#666;
+    font-weight:600;
+}
+
+.tooltip-table td:last-child{
+    text-align:right;
+    font-weight:600;
+}
+
+.tooltip-badge{
+    display:inline-block;
+    color:white;
+    font-size:12px;
+    font-weight:600;
+    padding:4px 10px;
+    border-radius:14px;
+    margin-bottom:12px;
+}
+
+.divider td{
+    padding:6px 0;
+    border-bottom:1px solid #ececec;
+}
+
+.diff-row td:first-child{
+    font-weight:600;
+    color:#444;
+}

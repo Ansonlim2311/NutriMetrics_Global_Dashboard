@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/waterfall.css">
+    <link rel="stylesheet" href="css/scatter.css">
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
@@ -127,7 +128,7 @@
         </div>
 
         <!-- WATERFALL -->
-        <div class="chart-card">
+        <div class="chart-card waterfall-card">
             <div class="waterfall-header">
                 <div class="waterfall-left">
                     <h3>Food Supply Chain Analysis</h3>
@@ -192,9 +193,14 @@
         </div>
 
         <!-- SCATTER -->
-        <div class="chart-card">
+        <div class="chart-card scatter-card">
 
-            <h3>Protein vs Fat Supply</h3>
+            <div class="scatter-header">
+                <h3>Protein vs Fat Supply</h3>
+                <p class="scatter-subtitle">
+                    Population represented by bubble size. Color indicate the country's nutrition profile
+                </p>
+            </div>
 
             <div id="scatter"></div>
 
@@ -214,6 +220,7 @@
     <script src="js/utils.js"></script>
     <script src="js/map.js"></script>
     <script src="js/waterfall.js"></script>
+    <script src="js/scatter.js"></script>
     <script src="js/data.js"></script>
 </body>
 </html>

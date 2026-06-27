@@ -5,8 +5,13 @@
     margin-bottom:10px;
 }
 
+.waterfall-card{
+    padding:14px 16px;
+}
+
 .waterfall-header h3{
     margin:0;
+    padding:0;
 }
 
 .waterfall-left{

@@ -8,7 +8,9 @@ function loadData(){
 
         initMap(world, foodData);
 
-        initWaterfall(foodData);        
+        initWaterfall(foodData); 
+        
+        initScatter(foodData);
     });
 
 }

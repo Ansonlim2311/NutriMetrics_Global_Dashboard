@@ -32,15 +32,12 @@ function initWaterfall(foodData) {
 
 function updateWaterfall(){
     if(!selectedCountry){
-        d3.select("#waterfallSubtitle")
-            .text("Click a country on the map");
-
+        d3.select("#waterfallSubtitle").text("Click a country on the map");
+        d3.select("#waterfallYear").text("");
         return;
     }
-    d3.select("#waterfallSubtitle")
-        .text(
-            `${selectedCountry} • ${selectedFood} • ${selectedYear.replace("Y","")}`
-        );
+    d3.select("#waterfallCountry").text(selectedCountry);
+    d3.select("#waterfallYear").text(`${selectedFood} | ${selectedYear.replace("Y", "")}`);
 
     const productionRow = waterfallData.find(d =>
         d.Area === selectedCountry && d.Item === selectedFood && d.Element === "Production"
@@ -51,10 +48,19 @@ function updateWaterfall(){
     const foodRow = waterfallData.find(d =>
         d.Area === selectedCountry && d.Item === selectedFood && d.Element === "Food"
     );
+    const worldDomestic = waterfallData.find(d =>
+        d.Area === "World" && d.Item === selectedFood && d.Element === "Domestic supply quantity"
+    );
+    const worldFood = waterfallData.find(d =>
+        d.Area === "World" && d.Item === selectedFood && d.Element === "Food"
+    );
 
     const production = productionRow ? +productionRow[selectedYear] : 0;
     const domestic = domesticRow ? +domesticRow[selectedYear] : 0;
     const food = foodRow ? +foodRow[selectedYear] : 0;
+    const countryRate = domestic === 0 ? 0 : (food / domestic) * 100;
+    const worldDomesticValue = worldDomestic ? +worldDomestic[selectedYear] : 0;
+    const worldFoodValue = worldFood ? +worldFood[selectedYear] : 0;
 
     const change1 = domestic - production;
     const percent1 = production === 0 ? 0 : (change1 / production) * 100;
@@ -63,7 +69,21 @@ function updateWaterfall(){
     const utilization = domestic === 0 ? 0 : (food / domestic) * 100;
     const color1 = change1 >= 0 ? "#2e7d32" : "#d32f2f";
     const color2 = change2 >= 0 ? "#2e7d32" : "#d32f2f";
+    const sign1 = change1 >= 0 ? "+" : "-";
+    const sign2 = change2 >= 0 ? "+" : "-";
+    const worldRate = worldDomesticValue === 0 ? 0 : (worldFoodValue / worldDomesticValue) * 100;
+    const difference = utilization - worldRate;
+    const symbol = difference >= 0 ? "+" : "";
+    const diffCard = d3.select("#worldDifference");
+    if (difference >= 0){
+        diffCard.style("color", "#2e7d32").text(`▲ ${difference.toFixed(1)}% vs World`);
+    }
+    else {
+        diffCard.style("color", "#d32f2f").text(`▼ ${Math.abs(difference).toFixed(1)}% vs World`);
+    }
 
+    d3.select("#worldRate").text(worldRate.toFixed(1) + "%");
+    d3.select("#consumptionRate").text(utilization.toFixed(1) + "%");
     d3.select("#waterfall")
     .html(`
         <div class="flow-container">
@@ -74,9 +94,9 @@ function updateWaterfall(){
 
             <div class="flow-arrow">
                 <div class="flow-change" style="color:${color1}">
-                    ${formatTonnes(Math.abs(change1))}
+                    ${sign1}${formatTonnes(Math.abs(change1))}
                     <br>
-                    ${percent1.toFixed(1)}%)
+                    (${percent1.toFixed(1)}%)
                 </div>
                 <div class="arrow">➜</div>
             </div>
@@ -88,7 +108,7 @@ function updateWaterfall(){
 
             <div class="flow-arrow">
                 <div class="flow-change" style="color:${color2}">
-                    ${formatTonnes(Math.abs(change2))}
+                    ${sign2}${formatTonnes(Math.abs(change2))}
                     <br>
                     (${percent2.toFixed(1)}%)
                 </div>
@@ -98,11 +118,6 @@ function updateWaterfall(){
             <div class="flow-box">
                 <div class="flow-title">Food Available</div>
                 <div class="flow-value">${formatTonnes(food)}</div>
-                <div class="flow-rate"> 
-                    ${utilization.toFixed(1)}%
-                    <br>
-                    <span> Human Consumption Rate </span>
-                </div>
             </div>
         </div>
         `)

@@ -1,0 +1,83 @@
+.stacked-layout{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:24px;
+}
+
+#stacked{
+    flex:none;
+}
+
+.stacked-kpi{
+    width:170px;
+}
+
+.stacked-kpi-card{
+    width:180px;
+    padding:18px;
+    border-radius:12px;
+    background:white;
+    border:1px solid #e5e5e5;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.stacked-title{
+    font-size:14px;
+    font-weight:600;
+    color:#555;
+}
+
+.vegetal-value{
+    font-size:34px;
+    font-weight:700;
+    color:#4CAF50;
+}
+
+.animal-value{
+    font-size:34px;
+    font-weight:700;
+    color:#FFB74D;
+}
+
+.stacked-change{
+    font-size:13px;
+    font-weight:600;
+    margin-top:5px;
+    margin-bottom:15px;
+}
+
+.stacked-kpi hr{
+    margin:18px 0;
+    border:none;
+    border-top:1px solid #e6e6e6;
+}
+
+.stacked-legend{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin-top:15px;
+}
+
+.stacked-legend .legend-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:500;
+}
+
+.legend-box{
+    width:14px;
+    height:14px;
+    border-radius:3px;
+}
+
+.legend-box.vegetal{
+    background:#4CAF50;
+}
+
+.legend-box.animal{
+    background:#FFB74D;
+}

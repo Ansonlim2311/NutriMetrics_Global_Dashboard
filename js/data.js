@@ -11,6 +11,8 @@ function loadData(){
         initWaterfall(foodData); 
         
         initScatter(foodData);
+
+        initStacked(foodData);
     });
 
 }

@@ -389,6 +389,7 @@ function initMap(world, foodData) {
             selectedCountry = country
             updateWaterfall();
             updateScatter();
+            updateStacked();
             d3.select("#selectedCountry")
                 .text(selectedCountry);
             updateSelection();
@@ -451,6 +452,7 @@ function initMap(world, foodData) {
             updateMap();
             updateWaterfall();
             updateScatter();
+            updateStacked();
         });
 
     d3.select("#resetZoom")

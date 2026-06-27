@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/waterfall.css">
     <link rel="stylesheet" href="css/scatter.css">
+    <link rel="stylesheet" href="css/stacked.css">
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
@@ -194,33 +195,83 @@
 
         <!-- SCATTER -->
         <div class="chart-card scatter-card">
-
             <div class="scatter-header">
                 <h3>Protein vs Fat Supply</h3>
                 <p class="scatter-subtitle">
                     Population represented by bubble size. Color indicate the country's nutrition profile
                 </p>
             </div>
-
             <div id="scatter"></div>
-
         </div>
 
         <!-- STACKED -->
-        <div class="chart-card">
+        <div class="chart-card stacked-card">
+            <div class="stacked-header">
+                <div>
+                    <h3>Vegetal vs Animal Products</h3>
+                    <div id="stackedCountry">
+                        Click a Country
+                    </div>
+                    <div id="stackedYear">
+                        --
+                    </div>
+                </div>
 
-            <h3>Vegetal vs Animal Products</h3>
+                <div class="stacked-filter">
+                    <label>Display</label>
 
-            <div id="stacked"></div>
+                    <select id="stackMode">
+                        <option value="percentage">Percentage</option>
+                        <option value="absolute">Absolute</option>
+                    </select>
+                </div>
+            </div>
 
+            <div class="stacked-layout">
+                <div id="stacked"></div>
+                <div class="stacked-legend">
+                    <div class="legend-item">
+                        <span class="legend-box vegetal"></span>
+                        Vegetal Products
+                    </div>
+
+                    <div class="legend-item">
+                        <span class="legend-box animal"></span>
+                        Animal Products
+                    </div>
+                </div>
+                <div class="stacked-kpi">
+                    <div class="stacked-kpi-card">
+                        <div class="stacked-title">
+                            Vegetal Products
+                        </div>
+                        <div id="vegetalValue" class="vegetal-value">
+                            --
+                        </div>
+                        <div id="vegetalChange" class="stacked-change">
+                            --
+                        </div>
+                        <hr>
+                        <div class="stacked-title">
+                            Animal Products
+                        </div>
+                        <div id="animalValue" class="animal-value">
+                            --
+                        </div>
+                        <div id="animalChange" class="stacked-change">
+                            --
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
     <div id="tooltip"></div>
     <script src="js/utils.js"></script>
     <script src="js/map.js"></script>
     <script src="js/waterfall.js"></script>
     <script src="js/scatter.js"></script>
+    <script src="js/stacked.js"></script>
     <script src="js/data.js"></script>
 </body>
 </html>

@@ -6,6 +6,7 @@
     <title>NutriMetrics Global</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/waterfall.css">
     <link rel="stylesheet" href="css/scatter.css">
     <link rel="stylesheet" href="css/stacked.css">
@@ -46,7 +47,7 @@
     <div class="dashboard">
 
         <!-- MAP -->
-        <div class="chart-card">
+        <div class="chart-card map-card">
 
             <div class="card-header">
                 <div class="header-left">
@@ -119,13 +120,93 @@
             </div>
         </div>
 
-        <!-- TREND -->
-        <div class="chart-card">
+        <!-- SCATTER -->
+        <div class="chart-card scatter-card">
+            <div class="scatter-header">
+                <h3>Protein vs Fat Supply</h3>
+                <p class="scatter-subtitle">
+                    Population represented by bubble size. 
+                    <br>
+                    Color indicate the country's nutrition profile
+                </p>
+            </div>
+            <div id="scatter"></div>
+        </div>
 
-            <h3>Population vs Food Supply Trend</h3>
+        <!-- STACKED -->
+        <div class="chart-card stacked-card">
+            <div class="stacked-header">
+                <div>
+                    <h3>Vegetal vs Animal Products</h3>
+                    <p class="stacked-subtitle">
+                    Composition of total food supply for the selected year
+                    </p>
+                    <div class="stacked-toolbar">
+                        <div class="stacked-meta">
+                            <span id="stackedCountry">Click a Country</span>
+                            <span class="meta-divider">|</span>
+                            <span id="stackedYear">--</span>
+                        </div>
+                        <div class="stacked-filter">
+                            <label>View</label>
+                            <select id="stackMode">
+                                <option value="percentage">Percentage</option>
+                                <option value="absolute">Absolute</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-            <div id="trend"></div>
+                <div class="stacked-legend">
+                    <div class="legend-item">
+                        <span class="legend-box vegetal"></span>
+                        Vegetal Products
+                    </div>
 
+                    <div class="legend-item">
+                        <span class="legend-box animal"></span>
+                        Animal Products
+                    </div>
+                </div>
+            </div>
+
+            <div id="stackedContent">
+                <div class="stacked-layout">
+                    <div id="stacked"></div>
+                    <div class="stacked-kpi">
+                        <div class="stacked-kpi-card">
+                            <div class="stacked-title">
+                                Total Food Supply
+                            </div>
+                            <div id="totalFoodValue" class="total-value">
+                                --
+                            </div>
+                            <hr>
+                            <div class="stacked-title">
+                                Vegetal Products
+                            </div>
+                            <div id="vegetalValue" class="vegetal-value">
+                                --
+                            </div>
+                            <div id="vegetalKcal" class="kcal-text"></div>
+                            <div id="vegetalChange" class="stacked-change">
+                                --
+                            </div>
+                            <hr>
+                            <div class="stacked-title">
+                                Animal Products
+                            </div>
+                            <div id="animalValue" class="animal-value">
+                                --
+                            </div>
+                            <div id="animalKcal" class="kcal-text"></div>
+                            <div id="animalChange" class="stacked-change">
+                                --
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- WATERFALL -->
@@ -184,6 +265,15 @@
             <div id="waterfall"></div>
         </div>
 
+        <!-- TREND -->
+        <div class="chart-card">
+
+            <h3>Population vs Food Supply Trend</h3>
+
+            <div id="trend"></div>
+
+        </div>
+
         <!-- RANKING -->
         <div class="chart-card">
 
@@ -191,79 +281,6 @@
 
             <div id="ranking"></div>
 
-        </div>
-
-        <!-- SCATTER -->
-        <div class="chart-card scatter-card">
-            <div class="scatter-header">
-                <h3>Protein vs Fat Supply</h3>
-                <p class="scatter-subtitle">
-                    Population represented by bubble size. Color indicate the country's nutrition profile
-                </p>
-            </div>
-            <div id="scatter"></div>
-        </div>
-
-        <!-- STACKED -->
-        <div class="chart-card stacked-card">
-            <div class="stacked-header">
-                <div>
-                    <h3>Vegetal vs Animal Products</h3>
-                    <div id="stackedCountry">
-                        Click a Country
-                    </div>
-                    <div id="stackedYear">
-                        --
-                    </div>
-                </div>
-
-                <div class="stacked-filter">
-                    <label>Display</label>
-
-                    <select id="stackMode">
-                        <option value="percentage">Percentage</option>
-                        <option value="absolute">Absolute</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="stacked-layout">
-                <div id="stacked"></div>
-                <div class="stacked-legend">
-                    <div class="legend-item">
-                        <span class="legend-box vegetal"></span>
-                        Vegetal Products
-                    </div>
-
-                    <div class="legend-item">
-                        <span class="legend-box animal"></span>
-                        Animal Products
-                    </div>
-                </div>
-                <div class="stacked-kpi">
-                    <div class="stacked-kpi-card">
-                        <div class="stacked-title">
-                            Vegetal Products
-                        </div>
-                        <div id="vegetalValue" class="vegetal-value">
-                            --
-                        </div>
-                        <div id="vegetalChange" class="stacked-change">
-                            --
-                        </div>
-                        <hr>
-                        <div class="stacked-title">
-                            Animal Products
-                        </div>
-                        <div id="animalValue" class="animal-value">
-                            --
-                        </div>
-                        <div id="animalChange" class="stacked-change">
-                            --
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
     <div id="tooltip"></div>

@@ -1,10 +1,6 @@
 let scatterData = [];
 
 const legendData = [
-    {color:"#4CAF50", label:"Protein-Rich"},
-    {color:"#FFC107", label:"High Intake"},
-    {color:"#42A5F5", label:"Lower Intake"},
-    {color:"#EF5350", label:"Fat-Dominant"},
     {color:"#8E44AD", label:"Selected Country"}
 ];
 function initScatter(foodData){
@@ -55,8 +51,8 @@ function updateScatter(){
         left: 70
     };
 
-    const width = 500;
-    const height = 400;
+    const width = 480;
+    const height = 300;
 
     const svg = d3.select("#scatter")
         .append("svg")
@@ -368,13 +364,13 @@ function updateScatter(){
         .attr("stroke-dasharray","3,2");
 
     const legend = svg.append("g")
-        .attr("transform", "translate(360, 210)");
+        .attr("transform", "translate(335, 185)");
 
     legend.append("rect")
         .attr("x",-15)
         .attr("y",-15)
         .attr("width",130)
-        .attr("height",130)
+        .attr("height",60)
         .attr("rx",10)
         .attr("fill","white")
         .attr("stroke","#cfcfcf")

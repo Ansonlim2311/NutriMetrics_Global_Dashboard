@@ -1,8 +1,21 @@
 .stacked-layout{
     display:flex;
-    align-items:center;
     justify-content:flex-start;
-    gap:24px;
+}
+
+.stacked-card {
+    width: 380px;
+    height: 340px;
+    padding:14px 16px;
+}
+
+.stacked-header h3{
+    margin:0;
+    padding:0;
+}
+
+.hidden{
+    display:none;
 }
 
 #stacked{
@@ -10,11 +23,14 @@
 }
 
 .stacked-kpi{
-    width:170px;
+    width:150px;
+    margin-left:-38px;
+    margin-top:-60px;
 }
 
 .stacked-kpi-card{
     width:180px;
+    height: 210px;
     padding:18px;
     border-radius:12px;
     background:white;
@@ -23,55 +39,80 @@
 }
 
 .stacked-title{
-    font-size:14px;
+    font-size:13px;
     font-weight:600;
     color:#555;
 }
 
 .vegetal-value{
-    font-size:34px;
+    font-size:20px;
     font-weight:700;
     color:#4CAF50;
 }
 
 .animal-value{
-    font-size:34px;
+    font-size:20px;
     font-weight:700;
     color:#FFB74D;
+}
+.total-value{
+    font-size:20px;
+    font-weight:700;
+    color:#333;
+    margin-bottom:8px;
+}
+
+.kcal-text{
+    font-size:13px;
+    color:#777;
+    margin-top:-4px;
+    margin-bottom:5px;
+}
+
+.stacked-subtitle{
+    color:#666;
+    font-size:13px;
+    margin-top:4px;
+    margin-bottom:12px;
 }
 
 .stacked-change{
     font-size:13px;
     font-weight:600;
-    margin-top:5px;
-    margin-bottom:15px;
 }
 
 .stacked-kpi hr{
-    margin:18px 0;
+    margin:10px 0;
     border:none;
     border-top:1px solid #e6e6e6;
 }
 
 .stacked-legend{
     display:flex;
-    justify-content:center;
-    gap:25px;
-    margin-top:15px;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:2px;
 }
 
 .stacked-legend .legend-item{
     display:flex;
     align-items:center;
-    gap:8px;
-    font-size:13px;
-    font-weight:500;
+    gap:6px;
+    font-size:12px;
+    font-weight:700;
+    color:#333;
 }
 
 .legend-box{
-    width:14px;
-    height:14px;
-    border-radius:3px;
+    width:15px;
+    height:15px;
+    border-radius:4px;
+    flex-shrink:0;
+}
+
+.stacked-filter{
+    margin-top:6px;
+    margin-bottom:18px;
 }
 
 .legend-box.vegetal{
@@ -80,4 +121,57 @@
 
 .legend-box.animal{
     background:#FFB74D;
+}
+
+#stackedCountry{
+    font-size: 15px;
+    color:#222;
+}
+
+#stackedYear{
+    color:#777;
+    font-weight:500;
+}
+
+.stacked-toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-top:10px;
+    margin-bottom:18px;
+}
+
+.stacked-meta{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:18px;
+    font-weight:600;
+}
+
+.meta-divider{
+    color:#bdbdbd;
+}
+
+.stacked-filter{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin:0;
+}
+
+.stacked-filter label{
+    font-size:14px;
+    color:#666;
+    font-weight:600;
+}
+
+.stacked-filter select{
+    padding:6px 12px;
+    border:1px solid #d8d8d8;
+    border-radius:8px;
+    background:white;
+    font-size:14px;
+    cursor:pointer;
 }

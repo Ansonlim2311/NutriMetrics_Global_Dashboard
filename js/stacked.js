@@ -15,11 +15,18 @@ function initStacked(foodData){
 
 function updateStacked(){
 
-    if(!selectedCountry){
-        d3.select("#stackedCountry")
-            .text("Click a Country");
-        return;
+if(!selectedCountry){
+    d3.select("#stackedCountry")
+        .text("Click a Country");
+    d3.select("#stackedYear")
+        .text("--");
+    d3.select("#stackedContent")
+        .classed("hidden", true);
+    return;
     }
+
+    d3.select("#stackedContent")
+        .classed("hidden", false);
 
     d3.select("#stackedCountry")
         .text(selectedCountry);
@@ -52,28 +59,38 @@ function updateStacked(){
     });
 
     d3.select("#stacked")
-        .selectAll("*")
-        .remove();
+    .selectAll("*")
+    .remove();
 
     const current = chartData.find(d => d.year == +selectedYear.replace("Y",""));
     const previous = chartData.find(d => d.year == (+selectedYear.replace("Y","") - 1));
+    const totalFood = current.vegetal + current.animal;
+
+    d3.select("#totalFoodValue")
+        .text(totalFood.toFixed(0) + " kcal");
 
     const vegChange = previous ? current.vegetalPct - previous.vegetalPct : 0;
     const animalChange = previous ? current.animalPct - previous.animalPct : 0;
 
     d3.select("#vegetalValue")
-        .text(
-            stackMode=="percentage"
-            ? current.vegetalPct.toFixed(1)+"%"
-            : current.vegetal.toFixed(0)
-        );
+    .text(
+        stackMode=="percentage"
+        ? current.vegetalPct.toFixed(1)+"%"
+        : current.vegetal.toFixed(0)
+    );
 
     d3.select("#animalValue")
-        .text(
-            stackMode=="percentage"
-            ? current.animalPct.toFixed(1)+"%"
-            : current.animal.toFixed(0)
-        );
+    .text(
+        stackMode=="percentage"
+        ? current.animalPct.toFixed(1)+"%"
+        : current.animal.toFixed(0)
+    );
+
+    d3.select("#vegetalKcal")
+    .text(current.vegetal.toFixed(0)+" kcal/day");
+
+    d3.select("#animalKcal")
+    .text(current.animal.toFixed(0)+" kcal/day");
 
     const changeText = `${vegChange>=0?"▲":"▼"} ${Math.abs(vegChange).toFixed(1)}% vs Previous Year`;
 
@@ -97,14 +114,14 @@ function updateStacked(){
                 : "#D32F2F"
         );
 
-    const width = 280;
-    const height = 340;
+    const width = 200;
+    const height = 200;
 
     const margin = {
-        top:30,
-        right:100,
-        bottom:40,
-        left:80
+        top:10,
+        right:10,
+        bottom:30,
+        left:25
     };
 
     const svg =
@@ -144,33 +161,25 @@ function updateStacked(){
             :current.animal;
 
     const vegetalBar = svg.append("rect")
-        .attr("x",170)
-        .attr("width",80)
+        .attr("x",40)
+        .attr("width",60)
         .attr("y",height-margin.bottom)
         .attr("height",0)
-        .attr("rx",4)
+        .attr("rx",0)
         .attr("fill","#4CAF50")
-        .attr("y",y(vegetalValue))
-        .attr("height",
-            height-margin.bottom-y(vegetalValue)
-        );
 
     const animalBar = svg.append("rect")
-        .attr("x",170)
-        .attr("width",80)
+        .attr("x",40)
+        .attr("width",60)
         .attr("y",height-margin.bottom)
         .attr("height",0)
         .attr("rx",4)
         .attr("fill","#FFB74D")
-        .attr("y",y(vegetalValue+animalValue))
-        .attr("height",
-            y(vegetalValue)-
-            y(vegetalValue+animalValue)
-        );
 
     vegetalBar
         .transition()
         .duration(700)
+        .ease(d3.easeCubicOut)
         .attr("y",y(vegetalValue))
         .attr(
             "height",
@@ -180,6 +189,7 @@ function updateStacked(){
     animalBar
         .transition()
         .duration(700)
+        .ease(d3.easeCubicOut)
         .attr("y", y(vegetalValue + animalValue))
         .attr(
             "height",
@@ -192,32 +202,39 @@ function updateStacked(){
         d3.select("#tooltip")
             .style("opacity",1)
             .html(`
-                <div class="tooltip-title">
-                    🌿 Vegetal Products
-                </div>
+            <div class="tooltip-title">
+            🌿 Vegetal Products
+            </div>
 
-                <div class="tooltip-divider"></div>
+            <div class="tooltip-divider"></div>
 
-                <div class="tooltip-row">
-                    <span>Food Supply</span>
-                    <strong>${current.vegetal.toFixed(0)} kcal</strong>
-                </div>
+            <div class="tooltip-row">
+            <span>Food Supply</span>
+            <strong>${current.vegetal.toFixed(0)} kcal/day</strong>
+            </div>
 
-                <div class="tooltip-row">
-                    <span>Share of Total</span>
-                    <strong>${current.vegetalPct.toFixed(1)}%</strong>
-                </div>
+            <div class="tooltip-row">
+            <span>Share</span>
+            <strong>${current.vegetalPct.toFixed(1)}%</strong>
+            </div>
 
-                <div class="tooltip-row">
-                    <span>Compared to ${current.year-1}</span>
+            <div class="tooltip-row">
+            <span>Total Supply</span>
+            <strong>${(current.vegetal+current.animal).toFixed(0)} kcal</strong>
+            </div>
 
-                    <strong style="
-                        color:${vegChange>=0 ? "#2E7D32":"#D32F2F"};
-                    ">
-                        ${vegChange>=0?"▲":"▼"}
-                        ${Math.abs(vegChange).toFixed(1)}%
-                    </strong>
-                </div>
+            <div class="tooltip-row">
+            <span>Compared to ${current.year-1}</span>
+
+            <strong style="color:${
+            vegChange>=0
+            ?"#2E7D32"
+            :"#D32F2F"
+            }">
+            ${vegChange>=0?"▲":"▼"}
+            ${Math.abs(vegChange).toFixed(1)}%
+            </strong>
+            </div>
             `);
     })
     .on("mousemove",function(event){
@@ -235,32 +252,39 @@ function updateStacked(){
         d3.select("#tooltip")
             .style("opacity",1)
             .html(`
-                <div class="tooltip-title">
-                    🥩 Animal Products
-                </div>
+            <div class="tooltip-title">
+            🥩 Animal Products
+            </div>
 
-                <div class="tooltip-divider"></div>
+            <div class="tooltip-divider"></div>
 
-                <div class="tooltip-row">
-                    <span>Food Supply</span>
-                    <strong>${current.animal.toFixed(0)} kcal</strong>
-                </div>
+            <div class="tooltip-row">
+            <span>Food Supply</span>
+            <strong>${current.animal.toFixed(0)} kcal/day</strong>
+            </div>
 
-                <div class="tooltip-row">
-                    <span>Share of Total</span>
-                    <strong>${current.animalPct.toFixed(1)}%</strong>
-                </div>
+            <div class="tooltip-row">
+            <span>Share</span>
+            <strong>${current.animalPct.toFixed(1)}%</strong>
+            </div>
 
-                <div class="tooltip-row">
-                    <span>Compared to ${current.year-1}</span>
+            <div class="tooltip-row">
+            <span>Total Supply</span>
+            <strong>${(current.vegetal+current.animal).toFixed(0)} kcal</strong>
+            </div>
 
-                    <strong style="
-                        color:${animalChange>=0 ? "#2E7D32":"#D32F2F"};
-                    ">
-                        ${animalChange>=0?"▲":"▼"}
-                        ${Math.abs(animalChange).toFixed(1)}%
-                    </strong>
-                </div>
+            <div class="tooltip-row">
+            <span>Compared to ${current.year-1}</span>
+
+            <strong style="color:${
+            animalChange>=0
+            ?"#2E7D32"
+            :"#D32F2F"
+            }">
+            ${animalChange>=0?"▲":"▼"}
+            ${Math.abs(animalChange).toFixed(1)}%
+            </strong>
+            </div>
             `);
     })
     .on("mousemove",function(event){

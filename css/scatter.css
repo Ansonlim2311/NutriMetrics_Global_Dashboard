@@ -27,37 +27,53 @@
     background:white;
     border-radius:12px;
     padding:14px 16px;
-    min-width:240px;
+    min-width:180px;
     box-shadow:0 8px 25px rgba(0,0,0,.15);
     border:1px solid #dfe3e8;
 }
 
 .tooltip-title{
-    font-size:16px;
+    font-size:20px;
     font-weight:700;
     color:#333;
     margin-bottom:10px;
 }
 
-.tooltip-divider{
-    height:1px;
-    background:#e6e6e6;
-    margin:8px 0 10px;
+.tooltip-section{
+    margin:10px 0;
 }
 
-.tooltip-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:8px 0;
-    font-size:14px;
-}
-
-.tooltip-row span{
+.tooltip-label{
+    font-size:13px;
     color:#666;
+    font-weight:600;
 }
 
-.tooltip-row strong{
-    color:#222;
+.tooltip-value{
+    font-size:18px;
     font-weight:700;
+    color:#333;
+    margin-top:3px;
+}
+
+.tooltip-diff{
+    font-size:13px;
+    font-weight:600;
+    margin-top:4px;
+}
+
+#tooltip hr{
+    border:none;
+    border-top:1px solid #ececec;
+    margin:12px 0;
+}
+
+.tooltip-badge{
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:20px;
+    color:white;
+    font-size:12px;
+    font-weight:600;
+    margin:8px 0 10px;
 }

@@ -257,60 +257,72 @@ function updateScatter(){
             const proteinColor = proteinDiff >= 0 ? "#2e7d32" : "#d32f2f";
             const fatColor = fatDiff >= 0 ? "#2e7d32" : "#d32f2f";
 
-            d3.select("#tooltip")
-                .style("opacity",1)
-                .html(`
-                    <div class="tooltip-title">
-                        ${d.country}
-                    </div>
-                    <div class="tooltip-badge"
-                        style="background:${profileColor};">
-                        ${profile}
-                    </div>
+        d3.select("#tooltip")
+        .style("opacity",1)
+        .html(`
+            <div class="tooltip-title">
+                ${d.country}
+            </div>
 
-                    <table class="tooltip-table">
-                        <tr>
-                            <td>Protein Supply</td>
-                            <td>${d.protein.toFixed(1)} g</td>
-                        </tr>
-                        <tr>
-                            <td>Global Average Protein</td>
-                            <td>${avgProtein.toFixed(1)} g</td>
-                        </tr>
-                        <tr class="diff-row">
-                            <td>${proteinStatus}</td>
-                            <td style="color:${proteinColor}">
-                                ${proteinArrow}
-                                ${Math.abs(proteinDiff).toFixed(1)}%
-                            </td>
-                        </tr>
-                        <tr class="divider">
-                            <td colspan="2"></td>
-                        </tr>
-                        <tr>
-                            <td>Fat Supply</td>
-                            <td>${d.fat.toFixed(1)} g</td>
-                        </tr>
-                        <tr>
-                            <td>Global Average Fat</td>
-                            <td>${avgFat.toFixed(1)} g</td>
-                        </tr>
-                        <tr class="diff-row">
-                            <td>${fatStatus}</td>
-                            <td style="color:${fatColor}">
-                                ${fatArrow}
-                                ${Math.abs(fatDiff).toFixed(1)}%
-                            </td>
-                        </tr>
-                        <tr class="divider">
-                            <td colspan="2"></td>
-                        </tr>
-                        <tr>
-                            <td>Population</td>
-                            <td>${(d.population/1000).toFixed(1)} Million</td>
-                        </tr>
-                    </table>
-                `);
+            <div class="tooltip-badge"
+                style="background:${profileColor};">
+                ${profile}
+            </div>
+
+            <div class="tooltip-section">
+
+                <div class="tooltip-label">
+                    Protein Supply
+                </div>
+
+                <div class="tooltip-value">
+                    ${d.protein.toFixed(1)} g/day
+                </div>
+
+                <div class="tooltip-diff"
+                    style="color:${proteinColor}">
+                    ${proteinArrow}
+                    ${Math.abs(proteinDiff).toFixed(1)}%
+                    ${proteinStatus.toLowerCase()}
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="tooltip-section">
+
+                <div class="tooltip-label">
+                    Fat Supply
+                </div>
+
+                <div class="tooltip-value">
+                    ${d.fat.toFixed(1)} g/day
+                </div>
+
+                <div class="tooltip-diff"
+                    style="color:${fatColor}">
+                    ${fatArrow}
+                    ${Math.abs(fatDiff).toFixed(1)}%
+                    ${fatStatus.toLowerCase()}
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="tooltip-section">
+
+                <div class="tooltip-label">
+                    Population
+                </div>
+
+                <div class="tooltip-value">
+                    ${(d.population/1000).toFixed(1)} Million
+                </div>
+
+            </div>
+        `);
         })
 
         .on("mousemove", function(event){
